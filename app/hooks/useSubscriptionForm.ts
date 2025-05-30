@@ -112,7 +112,7 @@ export const useSubscriptionForm = () => {
         setErrors({ message: data.message || 'Something went wrong.', isError: true })
         return false
       }
-    } catch (error) {
+    } catch {
       setErrors({ message: 'An error occurred. Please try again.', isError: true })
       return false
     }

@@ -1,9 +1,9 @@
 'use client'
 
-import { useSubscriptionForm } from '../hooks/useSubscriptionForm'
-import { FormContainer } from '../components/FormContainer'
-import { Step1Form } from '../components/Step1Form'
-import { Step2Form } from '../components/Step2Form'
+import { useSubscriptionForm } from './hooks/useSubscriptionForm'
+import { FormContainer } from './components/FormContainer'
+import { Step1Form } from './components/Step1Form'
+import { Step2Form } from './components/Step2Form'
 
 export default function HomePage() {
   const {
