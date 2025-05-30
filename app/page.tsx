@@ -30,7 +30,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             {/* Hero Heading */}
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-cormorant font-bold text-white mb-6 leading-tight">
-              daily quotes"
+              daily quotes
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-4 max-w-2xl mx-auto">
               start every day inspired with handpicked quotes delivered right to your phone
