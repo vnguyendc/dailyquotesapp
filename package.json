@@ -11,15 +11,17 @@
     "env:setup": "node scripts/setup-environments.js",
     "db:migrate:001": "echo 'Run database/migrations/001_create_subscribers.sql in your Supabase SQL Editor'",
     "db:migrate:002": "echo 'Run database/migrations/002_create_sent_quotes.sql in your Supabase SQL Editor'",
+    "db:migrate:004": "echo 'Run database/migrations/004_create_quote_deliveries.sql in your Supabase SQL Editor'",
     "db:migrate": "echo 'Run all migrations in database/migrations/ in your Supabase SQL Editor'"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",
     "@supabase/supabase-js": "^2.49.8",
+    "@types/twilio": "^3.19.2",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "twilio": "^5.6.1"
+    "twilio": "^5.7.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
