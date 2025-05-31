@@ -219,7 +219,13 @@ curl -X GET "https://your-app.vercel.app/api/cron/daily-quotes" \
 ### Twilio SMS
 - **Outbound SMS**: ~$0.0075 per message
 - **Phone Number**: ~$1.15/month
-- **1000 subscribers/day**: ~$226/month
+
+**Cost Examples:**
+- **100 subscribers/day**: $0.75/day → ~$23.65/month
+- **1000 subscribers/day**: $7.50/day → ~$226.15/month
+- **5000 subscribers/day**: $37.50/day → ~$1,126.15/month
+
+*Calculation: (subscribers × $0.0075 × 30 days) + $1.15 phone rental*
 
 ### Supabase
 - **Free tier**: Up to 50,000 monthly active users
