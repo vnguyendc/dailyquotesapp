@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "env:check": "node scripts/setup-environments.js",
+    "env:setup": "node scripts/setup-environments.js",
+    "db:migrate": "echo 'Run database/migrations/001_create_subscribers.sql in your Supabase SQL Editor'"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",

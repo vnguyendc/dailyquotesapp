@@ -10,7 +10,22 @@ export const QUOTE_CATEGORIES = [
   'Life Lessons',
   'Mindfulness',
   'Creativity',
-  'Leadership'
+  'Leadership',
+  'Religious & Spiritual',
+  'Affirmations'
+]
+
+export const PERSONA_OPTIONS = [
+  'Athlete',
+  'Entrepreneur', 
+  'Student',
+  'Professional',
+  'Parent',
+  'Creative',
+  'Leader/Manager',
+  'Teacher/Educator',
+  'Healthcare Worker',
+  'Other'
 ]
 
 export const TIME_OPTIONS: TimeOption[] = [

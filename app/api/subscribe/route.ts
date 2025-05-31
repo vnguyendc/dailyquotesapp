@@ -1,9 +1,10 @@
 import { supabase } from '@/lib/supabaseClient'
+import { normalizePhoneNumber, isValidPhoneNumber } from '../../lib/phoneUtils'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
   try {
-    const { firstName, lastName, email, phone, categories, deliveryTime } = await req.json()
+    const { firstName, lastName, email, phone, categories, deliveryTime, persona } = await req.json()
 
     // Validation
     if (!firstName?.trim()) {
@@ -19,8 +20,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Invalid email address' }, { status: 400 })
     }
 
-    if (!phone?.match(/^\+?[1-9]\d{1,14}$/)) {
-      return NextResponse.json({ message: 'Invalid phone number' }, { status: 400 })
+    if (!isValidPhoneNumber(phone)) {
+      return NextResponse.json({ message: 'Please enter a valid phone number' }, { status: 400 })
     }
 
     // Validate personalization fields
@@ -32,12 +33,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Please select a delivery time' }, { status: 400 })
     }
 
+    if (!persona?.trim()) {
+      return NextResponse.json({ message: 'Please select your persona type' }, { status: 400 })
+    }
+
+    // Normalize phone number for consistency
+    const normalizedPhone = normalizePhoneNumber(phone)
+
     // Check if email already exists (only if email is provided)
     if (email) {
       const { data: existingEmailSubscriber, error: emailSelectError } = await supabase
         .from('subscribers')
         .select('email')
-        .eq('email', email)
+        .eq('email', email.toLowerCase().trim())
         .maybeSingle()
 
       if (emailSelectError && emailSelectError.code !== 'PGRST116') {
@@ -54,7 +62,7 @@ export async function POST(req: NextRequest) {
     const { data: existingPhoneSubscriber, error: phoneSelectError } = await supabase
       .from('subscribers')
       .select('phone')
-      .eq('phone', phone)
+      .eq('phone', normalizedPhone)
       .maybeSingle()
 
     if (phoneSelectError && phoneSelectError.code !== 'PGRST116') {
@@ -67,23 +75,38 @@ export async function POST(req: NextRequest) {
     }
 
     // Insert new subscriber
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('subscribers')
       .insert([{ 
-        first_name: firstName, 
-        last_name: lastName, 
-        email: email || null, 
-        phone, 
+        first_name: firstName.trim(), 
+        last_name: lastName.trim(), 
+        email: email ? email.toLowerCase().trim() : null, 
+        phone: normalizedPhone, 
         categories: categories,
         delivery_time: deliveryTime,
+        persona: persona.trim(),
         is_active: true, 
         timezone: 'UTC' 
       }])
+      .select()
 
     if (error) {
       console.error('Error inserting subscriber:', error)
+      
+      // Handle specific database errors
+      if (error.code === '23505') { // Unique constraint violation
+        if (error.message.includes('email')) {
+          return NextResponse.json({ message: 'This email address is already subscribed.' }, { status: 409 })
+        }
+        if (error.message.includes('phone')) {
+          return NextResponse.json({ message: 'This phone number is already subscribed.' }, { status: 409 })
+        }
+      }
+      
       return NextResponse.json({ message: 'Failed to subscribe. Please try again.' }, { status: 500 })
     }
+
+    console.log('New subscriber created:', data?.[0]?.id)
 
     return NextResponse.json({ 
       message: `Welcome aboard, ${firstName}! Your personalized daily quotes will arrive at ${deliveryTime}.` 

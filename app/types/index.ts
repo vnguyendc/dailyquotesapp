@@ -5,6 +5,7 @@ export interface FormData {
   phone: string
   categories: string[]
   deliveryTime: string
+  persona: string
 }
 
 export interface TimeOption {

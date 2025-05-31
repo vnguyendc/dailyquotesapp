@@ -1,5 +1,5 @@
 import { FormData } from '../types'
-import { QUOTE_CATEGORIES, TIME_OPTIONS } from '../constants/formOptions'
+import { QUOTE_CATEGORIES, TIME_OPTIONS, PERSONA_OPTIONS } from '../constants/formOptions'
 
 interface Step2FormProps {
   formData: FormData
@@ -41,6 +41,28 @@ export const Step2Form = ({
             </label>
           ))}
         </div>
+      </div>
+
+      {/* Persona Selection */}
+      <div>
+        <label htmlFor="persona" className="block text-sm font-medium text-gray-900 mb-2">
+          What best describes you?
+        </label>
+        <select
+          id="persona"
+          name="persona"
+          required
+          className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-gray-900"
+          value={formData.persona}
+          onChange={(e) => updateFormData('persona', e.target.value)}
+        >
+          <option value="">Select one</option>
+          {PERSONA_OPTIONS.map((persona) => (
+            <option key={persona} value={persona}>
+              {persona}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Delivery Time */}

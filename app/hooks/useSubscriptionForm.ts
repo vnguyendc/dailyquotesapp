@@ -11,7 +11,8 @@ export const useSubscriptionForm = () => {
     email: '',
     phone: '',
     categories: [],
-    deliveryTime: ''
+    deliveryTime: '',
+    persona: ''
   })
   const [errors, setErrors] = useState<FormErrors>({
     message: '',
@@ -69,6 +70,11 @@ export const useSubscriptionForm = () => {
       return false
     }
 
+    if (!formData.persona) {
+      setErrors({ message: 'Please select your persona type.', isError: true })
+      return false
+    }
+
     return true
   }
 
@@ -89,7 +95,8 @@ export const useSubscriptionForm = () => {
           email: formData.email.trim() || null,
           phone: formData.phone,
           categories: formData.categories,
-          deliveryTime: formData.deliveryTime
+          deliveryTime: formData.deliveryTime,
+          persona: formData.persona
         }),
       })
 
@@ -104,7 +111,8 @@ export const useSubscriptionForm = () => {
           email: '',
           phone: '',
           categories: [],
-          deliveryTime: ''
+          deliveryTime: '',
+          persona: ''
         })
         setCurrentStep(1)
         return true

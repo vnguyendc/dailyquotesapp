@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Environment Variables
+.env*.local
+.env.production
+.env.development
+
+# Test files
+test-supabase.js
