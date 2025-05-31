@@ -6,7 +6,8 @@ const path = require('path');
 const REQUIRED_VARS = [
   'NEXT_PUBLIC_SUPABASE_URL',
   'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-  'ADMIN_SECRET'
+  'ADMIN_SECRET',
+  'ANTHROPIC_API_KEY'
 ];
 
 const OPTIONAL_VARS = [
@@ -62,6 +63,9 @@ function createSampleEnv() {
   const sampleContent = `# DEVELOPMENT ENVIRONMENT
 NEXT_PUBLIC_SUPABASE_URL=https://your-dev-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_dev_anon_key_here
+
+# Claude API for quote generation
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
 
 # Development Twilio (can use test credentials)
 TWILIO_SID=your_dev_twilio_sid
