@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { generatePersonalizedQuote, generateMultipleQuotes, QuoteRequest } from '../../../lib/claudeClient'
+import { generatePersonalizedQuote, generateMultipleQuotes, QuoteRequest } from '../../../lib/clients/claudeClient'
 
 export async function POST(req: NextRequest) {
   try {

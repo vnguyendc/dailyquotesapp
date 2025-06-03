@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/app/lib/clients/supabaseClient'
 import { getQuoteStats } from '../../../lib/quoteHistoryService'
 
 export async function GET(req: NextRequest) {

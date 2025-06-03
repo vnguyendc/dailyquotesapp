@@ -1,5 +1,5 @@
-import { sendSMS, formatQuoteForSMS } from './twilioClient'
-import { supabase } from '../../lib/supabaseClient'
+import { sendSMS, formatQuoteForSMS } from './clients/twilioClient'
+import { supabase } from './clients/supabaseClient'
 
 export interface QuoteDelivery {
   id?: string
@@ -227,7 +227,7 @@ interface SubscriberData {
 /**
  * Get personalized message based on subscriber's persona
  */
-function getPersonalizationForSubscriber(subscriber: SubscriberData): string {
+export function getPersonalizationForSubscriber(subscriber: SubscriberData): string {
   const persona = subscriber.persona?.toLowerCase() || 'default'
   
   const personalizations: Record<string, string[]> = {
@@ -348,7 +348,7 @@ export async function testSMSDelivery(subscriberId: string, customMessage?: stri
       }
     }
 
-    const testMessage = customMessage || `Hello ${subscriber.first_name}! This is a test message from Daily Quotes. Your SMS service is working perfectly! 📱✨`
+    const testMessage = customMessage || `Hello ${subscriber.first_name}! This is a test message from Your Daily Dose. Your SMS service is working perfectly! 📱✨`
 
     const smsResult = await sendSMS({
       to: subscriber.phone,

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { generatePersonalizedQuote } from '../../../lib/claudeClient'
+import { generatePersonalizedQuote } from '../../../lib/clients/claudeClient'
 
 export async function GET() {
   try {

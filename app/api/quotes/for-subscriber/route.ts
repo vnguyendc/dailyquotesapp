@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/app/lib/clients/supabaseClient'
 import { generateUniqueQuoteForSubscriber } from '../../../lib/quoteGenerationService'
 
 export async function POST(req: NextRequest) {

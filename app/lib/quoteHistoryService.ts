@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabaseClient'
-import { GeneratedQuote } from './claudeClient'
+import { supabase } from '@/app/lib/clients/supabaseClient'
+import { GeneratedQuote } from './clients/claudeClient'
 
 export interface QuoteHistory {
   id: string

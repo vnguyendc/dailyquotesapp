@@ -26,7 +26,7 @@ export async function generatePersonalizedQuote(request: QuoteRequest): Promise<
 Rules:
 1. Generate quotes that feel authentic and meaningful
 2. Mix real quotes from known figures with thoughtfully crafted original ones
-3. When using original quotes, attribute to "Anonymous" or "Daily Quotes"
+3. When using original quotes, attribute to "Anonymous" or "Your Daily Dose"
 4. Keep quotes concise (under 150 characters ideally)
 5. Ensure the quote directly relates to the person's persona and categories
 6. Avoid clichés and overused quotes

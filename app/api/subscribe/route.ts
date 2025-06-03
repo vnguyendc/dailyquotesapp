@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/app/lib/clients/supabaseClient'
 import { normalizePhoneNumber, isValidPhoneNumber } from '../../lib/phoneUtils'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
     console.log('New subscriber created:', data?.[0]?.id)
 
     return NextResponse.json({ 
-      message: `Welcome aboard, ${firstName}! Your personalized daily quotes will arrive at ${deliveryTime}.` 
+      message: `Welcome aboard, ${firstName}! Your personalized daily dose will arrive at ${deliveryTime}.` 
     }, { status: 201 })
   } catch (error) {
     console.error('Subscription error:', error)

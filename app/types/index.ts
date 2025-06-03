@@ -1,11 +1,28 @@
 export interface FormData {
+  // Basic information (moved to step 8)
   firstName: string
   lastName: string
   email: string
   phone: string
-  categories: string[]
   deliveryTime: string
-  persona: string
+  
+  // Delivery preferences (new for step 8)
+  deliveryMethod: string[] // ['email', 'sms'] - can be both
+  
+  // Personalization fields (reordered)
+  selfDescription: string
+  personalGoals: string[]
+  customGoal: string
+  publicFigures: string
+  personalHeroes: string
+  emotionalThemes: string[]
+  personalAffirmation: string
+  preferredTone: string
+  moodTracking: boolean
+  
+  // Authentication fields (for final step)
+  password: string
+  confirmPassword: string
 }
 
 export interface TimeOption {

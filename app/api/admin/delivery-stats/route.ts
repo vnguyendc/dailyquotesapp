@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getDeliveryStats } from '@/app/lib/smsQuoteService'
-import { supabase } from '../../../../lib/supabaseClient'
+import { supabase } from '../../../lib/clients/supabaseClient'
 
 interface DeliveryWithSubscriber {
   delivery_status: string

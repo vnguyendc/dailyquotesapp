@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { testTwilioConnection } from '@/app/lib/clients/twilioClient'
-import { testSMSDelivery } from '@/app/lib/smsQuoteService'
+import { testResendConnection } from '@/app/lib/clients/emailClient'
+import { testEmailDelivery } from '@/app/lib/emailQuoteService'
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,44 +8,44 @@ export async function GET(request: NextRequest) {
     const subscriberId = searchParams.get('subscriberId')
     const testMessage = searchParams.get('message')
 
-    // Test Twilio connection first
-    const connectionTest = await testTwilioConnection()
+    // Test Resend connection first
+    const connectionTest = await testResendConnection()
 
     if (!connectionTest.success) {
       return NextResponse.json({
         success: false,
-        error: 'Twilio connection failed',
+        error: 'Resend connection failed',
         details: connectionTest.error
       }, { status: 500 })
     }
 
-    console.log('Twilio connection successful:', connectionTest.accountInfo)
+    console.log('Resend connection successful:', connectionTest.apiKeyStatus)
 
     if (subscriberId) {
-      // Test SMS delivery to specific subscriber
-      console.log(`Testing SMS delivery to subscriber: ${subscriberId}`)
+      // Test email delivery to specific subscriber
+      console.log(`Testing email delivery to subscriber: ${subscriberId}`)
       
-      const deliveryTest = await testSMSDelivery(subscriberId, testMessage || undefined)
+      const deliveryTest = await testEmailDelivery(subscriberId, testMessage || undefined)
       
       return NextResponse.json({
         success: true,
-        twilioConnection: connectionTest,
-        smsDelivery: deliveryTest,
+        resendConnection: connectionTest,
+        emailDelivery: deliveryTest,
         message: deliveryTest.success ? 
-          'SMS test completed successfully' : 
-          'SMS test failed'
+          'Email test completed successfully' : 
+          'Email test failed'
       })
     } else {
       // Just test connection
       return NextResponse.json({
         success: true,
-        twilioConnection: connectionTest,
-        message: 'Twilio connection test successful'
+        resendConnection: connectionTest,
+        message: 'Resend connection test successful'
       })
     }
 
   } catch (error) {
-    console.error('Error in SMS test API:', error)
+    console.error('Error in email test API:', error)
     return NextResponse.json(
       { 
         error: 'Internal server error', 
@@ -67,32 +67,32 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Test Twilio connection first
-    const connectionTest = await testTwilioConnection()
+    // Test Resend connection first
+    const connectionTest = await testResendConnection()
 
     if (!connectionTest.success) {
       return NextResponse.json({
         success: false,
-        error: 'Twilio connection failed',
+        error: 'Resend connection failed',
         details: connectionTest.error
       }, { status: 500 })
     }
 
-    console.log(`Testing SMS delivery to subscriber: ${subscriberId}`)
+    console.log(`Testing email delivery to subscriber: ${subscriberId}`)
     
-    const deliveryTest = await testSMSDelivery(subscriberId, message)
+    const deliveryTest = await testEmailDelivery(subscriberId, message)
     
     return NextResponse.json({
       success: true,
-      twilioConnection: connectionTest,
-      smsDelivery: deliveryTest,
+      resendConnection: connectionTest,
+      emailDelivery: deliveryTest,
       message: deliveryTest.success ? 
-        'SMS test completed successfully' : 
-        'SMS test failed'
+        'Email test completed successfully' : 
+        'Email test failed'
     })
 
   } catch (error) {
-    console.error('Error in SMS test API:', error)
+    console.error('Error in email test API:', error)
     return NextResponse.json(
       { 
         error: 'Internal server error', 

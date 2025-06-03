@@ -19,8 +19,11 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Daily Quotes",
-  description: "Start every day inspired with handpicked quotes delivered right to your phone",
+  title: "Your Daily Dose",
+  description: "AI-powered daily inspiration delivered to your device",
+  manifest: "/manifest.json",
+  themeColor: "#667eea",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({

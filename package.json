@@ -1,6 +1,7 @@
 {
-  "name": "dailyquotesapp",
+  "name": "your-daily-dose",
   "version": "0.1.0",
+  "description": "AI-powered daily inspiration delivered to your device",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -21,6 +22,7 @@
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^4.5.1",
     "twilio": "^5.7.0"
   },
   "devDependencies": {

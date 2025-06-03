@@ -1,4 +1,4 @@
-import { generatePersonalizedQuote, QuoteRequest, GeneratedQuote } from './claudeClient'
+import { generatePersonalizedQuote, QuoteRequest, GeneratedQuote } from './clients/claudeClient'
 import { getRecentQuotes, storeQuoteHistory, hasQuoteBeenSent, isSimilarToRecentQuotes } from './quoteHistoryService'
 
 export interface QuoteGenerationOptions {
