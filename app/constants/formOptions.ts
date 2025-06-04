@@ -35,7 +35,7 @@ export const PREFERRED_TONES = [
   'Spiritual and reflective',
   'Witty and light-hearted',
   'Raw and unfiltered',
-  'Let Claude decide'
+  'Let Us decide'
 ]
 
 export const DELIVERY_METHODS = [

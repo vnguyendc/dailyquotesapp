@@ -59,7 +59,7 @@ export const FormExperience = ({
   }
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50 flex items-center justify-center px-4 py-8 transition-all duration-500 ${isAnimating ? 'opacity-90' : 'opacity-100'}`}>
+    <div className={`min-h-screen bg-gradient-to-br from-blue-100 via-orange-100 to-yellow-100 flex items-center justify-center px-4 py-8 transition-all duration-500 ${isAnimating ? 'opacity-90' : 'opacity-100'}`}>
       <div className="max-w-2xl mx-auto">
         {/* Progress indicator */}
         <div className={`mb-8 transition-all duration-500 ${isAnimating ? 'opacity-50 transform translate-y-2' : 'opacity-100 transform translate-y-0'}`}>
@@ -80,7 +80,7 @@ export const FormExperience = ({
         {/* Form Container */}
         {currentStep === 1 ? (
           <div className={`transition-all duration-500 ${isAnimating ? 'opacity-0 transform scale-95' : 'opacity-100 transform scale-100'}`}>
-            <FormContainer currentStep={currentStep} errors={errors}>
+            <FormContainer currentStep={currentStep}>
               {renderCurrentStep()}
             </FormContainer>
           </div>

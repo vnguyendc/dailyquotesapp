@@ -16,7 +16,10 @@ const config: Config = {
         mistGrey: "#D9D9D9",
       },
       fontFamily: {
-        cormorant: ["var(--font-cormorant-garamond)", "serif"],
+        'heading': ["var(--font-poppins)", "sans-serif"],
+        'body': ["var(--font-lora)", "serif"],
+        'poppins': ["var(--font-poppins)", "sans-serif"],
+        'lora': ["var(--font-lora)", "serif"],
       },
     },
   },

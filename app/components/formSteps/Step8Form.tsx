@@ -1,5 +1,5 @@
 import { FormData } from '../../types'
-import { DELIVERY_TIMES } from '../../constants/formOptions'
+import { TIME_OPTIONS, DELIVERY_METHODS } from '../../constants/formOptions'
 
 interface Step8FormProps {
   formData: FormData
@@ -111,7 +111,7 @@ export const Step8Form = ({
             How would you like to receive your daily quotes? *
           </label>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {DELIVERY_TIMES.map((method) => (
+            {DELIVERY_METHODS.map((method) => (
               <label 
                 key={method.value} 
                 className={`flex items-center space-x-4 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
@@ -150,7 +150,7 @@ export const Step8Form = ({
             onChange={(e) => updateFormData('deliveryTime', e.target.value)}
           >
             <option value="">Select your preferred time</option>
-            {DELIVERY_TIMES.map((option) => (
+            {TIME_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>

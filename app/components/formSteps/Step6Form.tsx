@@ -1,5 +1,5 @@
 import { FormData } from '../../types'
-import { TONE_OPTIONS } from '../../constants/formOptions'
+import { PREFERRED_TONES } from '../../constants/formOptions'
 
 interface Step6FormProps {
   formData: FormData
@@ -35,7 +35,7 @@ export const Step6Form = ({
       <form onSubmit={handleSubmit} className="space-y-8">
         <div>
           <div className="grid grid-cols-1 gap-4">
-            {TONE_OPTIONS.map((tone) => (
+            {PREFERRED_TONES.map((tone) => (
               <label 
                 key={tone} 
                 className={`flex items-center space-x-4 p-4 rounded-2xl border-2 cursor-pointer transition-all ${

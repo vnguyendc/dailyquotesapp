@@ -1,29 +1,24 @@
+import React from 'react'
 import { FormErrors } from '../types'
 
 interface FormContainerProps {
-  currentStep: number
-  errors: FormErrors
   children: React.ReactNode
+  showBack?: boolean
+  onBack?: () => void
+  currentStep?: number
+  totalSteps?: number
+  showProgress?: boolean
 }
 
-export const FormContainer = ({ currentStep, errors, children }: FormContainerProps) => {
+export const FormContainer = ({ 
+  children,
+}: FormContainerProps) => {
   return (
     <div className="bg-white shadow-xl rounded-3xl p-8 md:p-10 max-w-2xl w-full border border-gray-100 animate-in slide-in-from-bottom-8 fade-in duration-500">
 
       <div className="animate-in slide-in-from-bottom-4 fade-in duration-500 delay-300">
         {children}
       </div>
-
-      {errors.message && (
-        <div className={`mt-6 p-4 rounded-2xl text-center transition-all duration-300 animate-in slide-in-from-bottom-4 ${
-          errors.isError 
-            ? 'bg-red-50 text-red-700 border border-red-200' 
-            : 'bg-green-50 text-green-700 border border-green-200'
-        }`}>
-          {!errors.isError && <div className="text-3xl mb-2 animate-bounce">🎉</div>}
-          <p className="font-medium">{errors.message}</p>
-        </div>
-      )}
 
       {/* Trust indicators */}
       <div className="mt-8 text-center animate-in slide-in-from-bottom-2 fade-in duration-500 delay-500">

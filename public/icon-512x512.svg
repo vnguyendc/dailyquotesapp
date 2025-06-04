@@ -1,0 +1,48 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sun rays -->
+  <g>
+    <rect x="252" y="32" width="8" height="64" rx="4" fill="#FB923C" opacity="0.9"/>
+    <rect x="252" y="416" width="8" height="64" rx="4" fill="#FB923C" opacity="0.9"/>
+    <rect x="32" y="252" width="64" height="8" rx="4" fill="#FB923C" opacity="0.9"/>
+    <rect x="416" y="252" width="64" height="8" rx="4" fill="#FB923C" opacity="0.9"/>
+    <rect x="92.16" y="92.16" width="8" height="64" rx="4" fill="#FB923C" opacity="0.8" transform="rotate(45 96.16 124.16)"/>
+    <rect x="355.84" y="355.84" width="8" height="64" rx="4" fill="#FB923C" opacity="0.8" transform="rotate(45 359.84 387.84)"/>
+    <rect x="92.16" y="355.84" width="8" height="64" rx="4" fill="#FB923C" opacity="0.8" transform="rotate(-45 96.16 387.84)"/>
+    <rect x="355.84" y="92.16" width="8" height="64" rx="4" fill="#FB923C" opacity="0.8" transform="rotate(-45 359.84 124.16)"/>
+  </g>
+  
+  <!-- Outer sun circle -->
+  <circle cx="256" cy="256" r="128" fill="url(#gradient1)"/>
+  
+  <!-- Inner sun circle -->
+  <circle cx="256" cy="256" r="80" fill="url(#gradient2)"/>
+  
+  <!-- Core center -->
+  <circle cx="256" cy="256" r="48" fill="url(#gradient3)"/>
+  
+  <!-- Highlight -->
+  <ellipse cx="256" cy="220" rx="24" ry="16" fill="url(#highlight)" opacity="0.6"/>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:1" />
+      <stop offset="20%" style="stop-color:#FDBA74;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#FED7AA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FEF3C7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FEF3C7;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#FDE68A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FBBF24;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="highlight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFBEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFFBEB;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+</svg> 
