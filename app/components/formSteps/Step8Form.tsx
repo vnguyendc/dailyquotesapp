@@ -30,7 +30,7 @@ export const Step8Form = ({
           Basic Information & Delivery
         </h2>
         <p className="text-lg text-gray-600">
-          Let's get your contact details and delivery preferences set up
+          Let&rsquo;s get your contact details and delivery preferences set up
         </p>
       </div>
 
@@ -131,8 +131,8 @@ export const Step8Form = ({
               </label>
             ))}
           </div>
-          <p className="mt-2 text-sm text-gray-500">
-            You can select both if you'd like quotes delivered via both methods
+          <p className="text-sm text-gray-600 mt-4">
+            You can select both if you&rsquo;d like quotes delivered via both methods
           </p>
         </div>
 

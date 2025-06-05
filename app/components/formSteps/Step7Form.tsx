@@ -68,7 +68,7 @@ export const Step7Form = ({
               Great choice! 📈
             </p>
             <p className="text-orange-700 text-sm">
-              You'll be able to track your daily mood alongside your quotes, helping you see patterns and growth over time.
+              You&rsquo;ll be able to track your daily mood alongside your quotes, helping you see patterns and growth over time.
             </p>
           </div>
         )}

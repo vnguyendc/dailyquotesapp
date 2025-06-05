@@ -1,56 +1,48 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { testResendConnection } from '@/app/lib/clients/emailClient'
-import { testEmailDelivery } from '@/app/lib/emailQuoteService'
+import { sendDailyQuoteEmail } from '@/app/lib/clients/emailClient'
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const subscriberId = searchParams.get('subscriberId')
-    const testMessage = searchParams.get('message')
+    const email = searchParams.get('email')
 
-    // Test Resend connection first
-    const connectionTest = await testResendConnection()
-
-    if (!connectionTest.success) {
-      return NextResponse.json({
-        success: false,
-        error: 'Resend connection failed',
-        details: connectionTest.error
-      }, { status: 500 })
+    if (!email) {
+      return NextResponse.json(
+        { error: 'Email query parameter is required' },
+        { status: 400 }
+      )
     }
 
-    console.log('Resend connection successful:', connectionTest.apiKeyStatus)
+    console.log(`Sending test quote email to: ${email}`)
 
-    if (subscriberId) {
-      // Test email delivery to specific subscriber
-      console.log(`Testing email delivery to subscriber: ${subscriberId}`)
-      
-      const deliveryTest = await testEmailDelivery(subscriberId, testMessage || undefined)
-      
+    const result = await sendDailyQuoteEmail({
+      to: email,
+      subscriberName: 'Test User',
+      quote: 'The future belongs to those who believe in the beauty of their dreams.',
+      author: 'Eleanor Roosevelt',
+      personalization: 'This is a test email to verify your daily quote delivery system! 📧✨'
+    })
+
+    if (result.success) {
       return NextResponse.json({
         success: true,
-        resendConnection: connectionTest,
-        emailDelivery: deliveryTest,
-        message: deliveryTest.success ? 
-          'Email test completed successfully' : 
-          'Email test failed'
+        message: 'Test email sent successfully',
+        messageId: result.messageId
       })
     } else {
-      // Just test connection
-      return NextResponse.json({
-        success: true,
-        resendConnection: connectionTest,
-        message: 'Resend connection test successful'
-      })
+      return NextResponse.json(
+        {
+          success: false,
+          error: result.error
+        },
+        { status: 400 }
+      )
     }
 
   } catch (error) {
     console.error('Error in email test API:', error)
     return NextResponse.json(
-      { 
-        error: 'Internal server error', 
-        details: error instanceof Error ? error.message : 'Unknown error' 
-      },
+      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
@@ -58,46 +50,45 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { subscriberId, message } = await request.json()
+    const { email, subscriberName, quote, author, personalization } = await request.json()
 
-    if (!subscriberId) {
+    if (!email) {
       return NextResponse.json(
-        { error: 'subscriberId is required' },
+        { error: 'Email address is required' },
         { status: 400 }
       )
     }
 
-    // Test Resend connection first
-    const connectionTest = await testResendConnection()
+    console.log(`Sending test quote email to: ${email}`)
 
-    if (!connectionTest.success) {
-      return NextResponse.json({
-        success: false,
-        error: 'Resend connection failed',
-        details: connectionTest.error
-      }, { status: 500 })
-    }
-
-    console.log(`Testing email delivery to subscriber: ${subscriberId}`)
-    
-    const deliveryTest = await testEmailDelivery(subscriberId, message)
-    
-    return NextResponse.json({
-      success: true,
-      resendConnection: connectionTest,
-      emailDelivery: deliveryTest,
-      message: deliveryTest.success ? 
-        'Email test completed successfully' : 
-        'Email test failed'
+    const result = await sendDailyQuoteEmail({
+      to: email,
+      subscriberName: subscriberName || 'Friend',
+      quote: quote || 'The only way to do great work is to love what you do.',
+      author: author || 'Steve Jobs',
+      personalization: personalization || 'This is a test email to verify your daily quote delivery is working perfectly! 🚀'
     })
+
+    if (result.success) {
+      return NextResponse.json({
+        success: true,
+        message: 'Test email sent successfully',
+        messageId: result.messageId
+      })
+    } else {
+      return NextResponse.json(
+        {
+          success: false,
+          error: result.error
+        },
+        { status: 400 }
+      )
+    }
 
   } catch (error) {
     console.error('Error in email test API:', error)
     return NextResponse.json(
-      { 
-        error: 'Internal server error', 
-        details: error instanceof Error ? error.message : 'Unknown error' 
-      },
+      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

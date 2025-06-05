@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Lora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
+import { AuthProvider } from "./lib/auth";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -42,10 +43,12 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${lora.variable} antialiased`}
       >
-        <Navbar />
-        <main className="pt-20">
-          {children}
-        </main>
+        <AuthProvider>
+          <Navbar />
+          <main className="pt-20">
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );

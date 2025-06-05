@@ -154,7 +154,7 @@ export const useFormState = (onReset?: () => void) => {
         setErrors({ message: result.message || 'Something went wrong', isError: true })
         return false
       }
-    } catch (error) {
+    } catch {
       console.log('API Request failed, using mock response for demo')
       // For demo purposes, we'll simulate a successful response
       setErrors({ 

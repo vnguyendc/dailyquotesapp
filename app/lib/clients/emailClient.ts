@@ -1,4 +1,6 @@
 import { Resend } from 'resend'
+import { render } from '@react-email/render'
+import DailyQuoteEmail from '@/app/components/emails/DailyQuoteEmail'
 
 // Initialize Resend client only when API key is available
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
@@ -6,8 +8,11 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 export interface EmailMessage {
   to: string
   subject: string
-  html: string
+  html?: string
   subscriberName?: string
+  quote?: string
+  author?: string
+  personalization?: string
 }
 
 export interface EmailResult {
@@ -30,11 +35,24 @@ export async function sendEmail(emailMessage: EmailMessage): Promise<EmailResult
       }
     }
 
+    // Use React Email template if quote data is provided, otherwise use custom HTML
+    let emailHtml = emailMessage.html
+    
+    if (emailMessage.quote && emailMessage.author) {
+      emailHtml = await render(DailyQuoteEmail({
+        subscriberName: emailMessage.subscriberName || 'Friend',
+        quote: emailMessage.quote,
+        author: emailMessage.author,
+        personalization: emailMessage.personalization,
+        unsubscribeUrl: '#' // TODO: Implement proper unsubscribe functionality
+      }))
+    }
+
     const result = await resend.emails.send({
-      from: process.env.FROM_EMAIL || 'Your Daily Dose <quotes@dailyquotes.app>',
+      from: 'Your Daily Dose <quotes@dailyquotesapp.vercel.app>',
       to: emailMessage.to,
       subject: emailMessage.subject,
-      html: emailMessage.html
+      html: emailHtml || ''
     })
 
     console.log(`Email sent successfully to ${emailMessage.to}: ${result.data?.id}`)
@@ -62,127 +80,54 @@ export async function sendEmail(emailMessage: EmailMessage): Promise<EmailResult
 }
 
 /**
- * Format a quote for email delivery
+ * Format a quote for email delivery using React Email template
  */
-export function formatQuoteForEmail(
+export async function formatQuoteForEmail(
   quote: string,
   author: string,
   subscriberName: string,
   personalization?: string
-): { subject: string; html: string } {
+): Promise<{ subject: string; html: string }> {
   const subject = `Your Daily Quote, ${subscriberName}! ✨`
   
-  const html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Daily Quote</title>
-      <style>
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          line-height: 1.6;
-          color: #333;
-          max-width: 600px;
-          margin: 0 auto;
-          padding: 20px;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .container {
-          background: white;
-          border-radius: 12px;
-          padding: 30px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .header {
-          text-align: center;
-          margin-bottom: 30px;
-        }
-        .greeting {
-          font-size: 24px;
-          color: #667eea;
-          margin-bottom: 10px;
-        }
-        .quote-container {
-          text-align: center;
-          margin: 30px 0;
-          padding: 25px;
-          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-          border-radius: 10px;
-          border-left: 4px solid #667eea;
-        }
-        .quote {
-          font-size: 20px;
-          font-style: italic;
-          color: #2c3e50;
-          margin-bottom: 15px;
-          line-height: 1.5;
-        }
-        .author {
-          font-size: 16px;
-          font-weight: 600;
-          color: #667eea;
-        }
-        .personalization {
-          background: #f8f9fa;
-          padding: 15px;
-          border-radius: 8px;
-          margin: 20px 0;
-          text-align: center;
-          color: #495057;
-          font-size: 16px;
-        }
-        .footer {
-          text-align: center;
-          margin-top: 30px;
-          padding-top: 20px;
-          border-top: 1px solid #e9ecef;
-          color: #6c757d;
-          font-size: 14px;
-        }
-        .unsubscribe {
-          color: #6c757d;
-          text-decoration: none;
-          font-size: 12px;
-        }
-        .emoji {
-          font-size: 1.2em;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <div class="greeting">Good morning, ${subscriberName}! <span class="emoji">☀️</span></div>
-          <p style="color: #6c757d; margin: 0;">Your daily dose of inspiration</p>
-        </div>
-        
-        <div class="quote-container">
-          <div class="quote">"${quote}"</div>
-          <div class="author">— ${author}</div>
-        </div>
-        
-        ${personalization ? `
-        <div class="personalization">
-          ${personalization}
-        </div>
-        ` : ''}
-        
-        <div class="footer">
-          <p><strong>Your Daily Dose</strong> <span class="emoji">📖</span></p>
-          <p>Transforming your day, one quote at a time</p>
-          <p>
-            <a href="#" class="unsubscribe">Unsubscribe</a> | 
-            <a href="#" class="unsubscribe">Update Preferences</a>
-          </p>
-        </div>
-      </div>
-    </body>
-    </html>
-  `
+  // Generate HTML using React Email template
+  const html = await render(DailyQuoteEmail({
+    subscriberName,
+    quote,
+    author,
+    personalization,
+    unsubscribeUrl: '#' // TODO: Implement proper unsubscribe functionality
+  }))
 
   return { subject, html }
+}
+
+/**
+ * Send a daily quote email with React Email template
+ */
+export async function sendDailyQuoteEmail({
+  to,
+  subscriberName,
+  quote,
+  author,
+  personalization
+}: {
+  to: string
+  subscriberName: string
+  quote: string
+  author: string
+  personalization?: string
+}): Promise<EmailResult> {
+  const subject = `Your Daily Quote, ${subscriberName}! ✨`
+  
+  return sendEmail({
+    to,
+    subject,
+    subscriberName,
+    quote,
+    author,
+    personalization
+  })
 }
 
 /**

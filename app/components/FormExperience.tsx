@@ -59,13 +59,13 @@ export const FormExperience = ({
   }
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-blue-100 via-orange-100 to-yellow-100 flex items-center justify-center px-4 py-8 transition-all duration-500 ${isAnimating ? 'opacity-90' : 'opacity-100'}`}>
+    <div className={`min-h-screen flex items-center justify-center px-4 py-8 transition-all duration-500 ${isAnimating ? 'opacity-90' : 'opacity-100'}`}>
       <div className="max-w-2xl mx-auto">
         {/* Progress indicator */}
         <div className={`mb-8 transition-all duration-500 ${isAnimating ? 'opacity-50 transform translate-y-2' : 'opacity-100 transform translate-y-0'}`}>
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-gray-500 font-medium">Step {currentStep} of 9</span>
-            <span className="text-sm text-gray-500 font-medium">{Math.round((currentStep / 9) * 100)}% complete</span>
+            <span className="text-sm text-white/90 font-medium drop-shadow">Step {currentStep} of 9</span>
+            <span className="text-sm text-white/90 font-medium drop-shadow">{Math.round((currentStep / 9) * 100)}% complete</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3 shadow-inner">
             <div 

@@ -22,6 +22,7 @@
 body {
   color: var(--foreground);
   font-family: var(--font-lora), serif;
+  background: transparent;
 }
 
 /* Heading elements use Poppins */

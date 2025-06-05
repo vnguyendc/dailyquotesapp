@@ -1,5 +1,4 @@
 import React from 'react'
-import { FormErrors } from '../types'
 
 interface FormContainerProps {
   children: React.ReactNode

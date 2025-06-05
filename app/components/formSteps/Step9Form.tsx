@@ -31,10 +31,10 @@ export const Step9Form = ({
           Create Your Account
         </h2>
         <p className="text-lg text-gray-600 mb-4">
-          Set up your password to access your personal dashboard
+          You&rsquo;re almost done! Create a secure password to protect your account.
         </p>
         <p className="text-sm text-gray-500">
-          You'll be able to log in and view all your received quotes and journal entries.
+          You&rsquo;ll be able to log in and view all your received quotes and journal entries.
         </p>
       </div>
 

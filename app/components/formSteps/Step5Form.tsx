@@ -46,10 +46,10 @@ export const Step5Form = ({
             className="w-full px-4 py-4 bg-white border border-gray-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-gray-900 placeholder-gray-500 text-lg resize-none"
             value={formData.personalAffirmation}
             onChange={(e) => updateFormData('personalAffirmation', e.target.value)}
-            placeholder="E.g., 'I am enough' or 'I show up no matter how I feel' or 'Progress over perfection'..."
+            placeholder="E.g., &lsquo;I am enough&rsquo; or &lsquo;I show up no matter how I feel&rsquo; or &lsquo;Progress over perfection&rsquo;..."
           />
           <p className="mt-2 text-sm text-gray-500">
-            Examples: "I am enough", "I show up no matter how I feel", "Progress over perfection"
+            Examples: &ldquo;I am enough&rdquo;, &ldquo;I show up no matter how I feel&rdquo;, &ldquo;Progress over perfection&rdquo;
           </p>
         </div>
 

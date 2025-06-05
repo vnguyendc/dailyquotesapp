@@ -52,7 +52,7 @@ export const Step3Form = ({
           {/* Personal Heroes */}
           <div>
             <label htmlFor="personalHeroes" className="block text-sm font-medium text-gray-900 mb-2">
-              Personal heroes (e.g., "my grandmother," "my mentor")
+              Personal heroes (e.g., &ldquo;my grandmother,&rdquo; &ldquo;my mentor&rdquo;)
             </label>
             <textarea
               id="personalHeroes"

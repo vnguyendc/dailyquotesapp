@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
-interface LandingPageProps {
-  onGetStarted: () => void
-}
-
-export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
+export const LandingPage = () => {
+  const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -17,22 +15,32 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
   const handleGetStarted = () => {
     setIsAnimating(true)
     setTimeout(() => {
-      onGetStarted()
+      router.push('/get-started')
     }, 300)
   }
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-blue-100 via-orange-100 to-yellow-100 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${isAnimating ? 'scale-95 opacity-0' : 'scale-100 opacity-100'}`}>
+    <div className={`min-h-screen transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${isAnimating ? 'scale-95 opacity-0' : 'scale-100 opacity-100'}`}>
       
       {/* Hero Section */}
-      <section className="flex items-center justify-center px-4 py-16 min-h-screen">
-        <div className="max-w-lg mx-auto text-center">
+      <section 
+        className="flex items-center justify-center px-4 py-16 min-h-screen relative -mt-20 pt-20"
+        style={{
+          backgroundImage: 'url(/simon-berger-twukN12EN7c-unsplash.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/10 to-black/30"></div>
+        <div className="max-w-5xl mx-auto text-center relative z-10">
           {/* Main heading */}
           <div className={`mb-8 transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'}`}>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Get your daily dose of inspiration
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed max-w-md mx-auto">
+            <p className="text-lg text-white/90 leading-relaxed max-w-md mx-auto drop-shadow">
               Receive AI-personalized quotes and reflections each day to inspire and motivate you.
             </p>
           </div>
@@ -55,7 +63,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
 
           {/* Trust indicators */}
           <div className={`mb-8 transition-all duration-700 delay-600 ${isLoaded ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'}`}>
-            <p className="text-gray-400 text-sm flex items-center justify-center space-x-4">
+            <p className="text-white/70 text-sm flex items-center justify-center space-x-4">
               <span className="flex items-center">
                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
                 Free to start
@@ -73,19 +81,19 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
 
           {/* Social proof stats */}
           <div className={`transition-all duration-700 delay-800 ${isLoaded ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'}`}>
-            <p className="text-gray-500 font-body mb-4 text-sm">Join thousands who start their day with purpose</p>
-            <div className="flex items-center justify-center space-x-6 text-lg font-bold text-gray-800">
+            <p className="text-white/80 font-body mb-4 text-sm drop-shadow">Join thousands who start their day with purpose</p>
+            <div className="flex items-center justify-center space-x-6 text-lg font-bold text-white">
               <div className="text-center">
-                <div className="font-heading">25,000+</div>
-                <div className="text-xs text-gray-500 font-body">Daily readers</div>
+                <div className="font-heading drop-shadow">25,000+</div>
+                <div className="text-xs text-white/70 font-body drop-shadow">Daily readers</div>
               </div>
               <div className="text-center">
-                <div className="font-heading">4.9/5</div>
-                <div className="text-xs text-gray-500 font-body">Average rating</div>
+                <div className="font-heading drop-shadow">4.9/5</div>
+                <div className="text-xs text-white/70 font-body drop-shadow">Average rating</div>
               </div>
               <div className="text-center">
-                <div className="font-heading">180+</div>
-                <div className="text-xs text-gray-500 font-body">Countries</div>
+                <div className="font-heading drop-shadow">180+</div>
+                <div className="text-xs text-white/70 font-body drop-shadow">Countries</div>
               </div>
             </div>
           </div>
@@ -93,7 +101,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-gradient-to-b from-white/80 to-transparent">
+      <section className="py-20 bg-gradient-to-br from-blue-100 via-orange-100 to-yellow-100">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4">
@@ -142,11 +150,11 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
       </section>
 
       {/* Example Quotes Section */}
-      <section className="py-20 bg-white/90 backdrop-blur-sm">
+      <section className="py-20 bg-gradient-to-br from-yellow-100 via-orange-100 to-blue-100">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4">
-              What you'll receive
+              What you&rsquo;ll receive
             </h2>
             <p className="text-lg text-gray-600 font-body max-w-2xl mx-auto">
               Personalized quotes tailored to your goals and current life situation
@@ -162,7 +170,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
                 </svg>
               </div>
               <blockquote className="text-gray-800 font-body text-lg mb-4 leading-relaxed">
-                "Your career breakthrough is waiting on the other side of your comfort zone."
+                &ldquo;Your career breakthrough is waiting on the other side of your comfort zone.&rdquo;
               </blockquote>
               <p className="text-sm text-gray-500 font-body">For: Career Growth Goals</p>
             </div>
@@ -175,7 +183,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
                 </svg>
               </div>
               <blockquote className="text-gray-800 font-body text-lg mb-4 leading-relaxed">
-                "Self-compassion is not self-indulgence. It's the foundation of genuine growth."
+                &ldquo;Self-compassion is not self-indulgence. It&rsquo;s the foundation of genuine growth.&rdquo;
               </blockquote>
               <p className="text-sm text-gray-500 font-body">For: Personal Development</p>
             </div>
@@ -188,7 +196,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
                 </svg>
               </div>
               <blockquote className="text-gray-800 font-body text-lg mb-4 leading-relaxed">
-                "Peace comes from accepting what you cannot change and acting on what you can."
+                &ldquo;Peace comes from accepting what you cannot change and acting on what you can.&rdquo;
               </blockquote>
               <p className="text-sm text-gray-500 font-body">For: Stress & Anxiety</p>
             </div>
@@ -197,7 +205,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-b from-transparent to-white/80">
+      <section className="py-20 bg-gradient-to-br from-blue-100 via-yellow-100 to-orange-100">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4">
@@ -218,7 +226,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
                 </div>
               </div>
               <p className="text-gray-700 font-body leading-relaxed">
-                "These daily quotes have completely shifted my mindset. I start each day with intention and purpose now."
+                &ldquo;These daily quotes have completely shifted my mindset. I start each day with intention and purpose now.&rdquo;
               </p>
               <div className="flex text-yellow-400 mt-4">
                 {'★'.repeat(5)}
@@ -237,7 +245,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
                 </div>
               </div>
               <p className="text-gray-700 font-body leading-relaxed">
-                "The personalization is incredible. Each quote feels like it was written specifically for what I'm going through."
+                &ldquo;The personalization is incredible. Each quote feels like it was written specifically for what I&rsquo;m going through.&rdquo;
               </p>
               <div className="flex text-yellow-400 mt-4">
                 {'★'.repeat(5)}
@@ -256,7 +264,7 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
                 </div>
               </div>
               <p className="text-gray-700 font-body leading-relaxed">
-                "I've tried many motivation apps, but this one actually makes me pause and reflect. Life-changing!"
+                &ldquo;I&rsquo;ve tried many motivation apps, but this one actually makes me pause and reflect. Life-changing!&rdquo;
               </p>
               <div className="flex text-yellow-400 mt-4">
                 {'★'.repeat(5)}
@@ -267,13 +275,13 @@ export const LandingPage = ({ onGetStarted }: LandingPageProps) => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gradient-to-br from-orange-100 via-blue-100 to-yellow-100">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-6">
             Ready to transform your daily routine?
           </h2>
           <p className="text-lg text-gray-600 font-body mb-8 max-w-2xl mx-auto">
-            Join thousands who've discovered the power of personalized daily inspiration. Start your journey today.
+            Join thousands who&rsquo;ve discovered the power of personalized daily inspiration. Start your journey today.
           </p>
           <button
             onClick={handleGetStarted}

@@ -90,7 +90,7 @@ export async function sendDailyQuoteToSubscriberViaEmail(subscriberId: string): 
     // Format for email
     const subscriberName = `${subscriber.first_name || 'Friend'}`
     const personalization = getPersonalizationForSubscriber(subscriber)
-    const { subject, html } = formatQuoteForEmail(quote, author, subscriberName, personalization)
+    const { subject, html } = await formatQuoteForEmail(quote, author, subscriberName, personalization)
 
     // Send email
     const emailResult = await sendEmail({
@@ -243,7 +243,7 @@ export async function testEmailDelivery(subscriberId: string, customMessage?: st
 
     const testMessage = customMessage || `Hello ${subscriber.first_name}! This is a test email from Your Daily Dose. Your email delivery is working perfectly! 📧✨`
     
-    const { subject, html } = formatQuoteForEmail(
+    const { subject, html } = await formatQuoteForEmail(
       testMessage,
       'Your Daily Dose Team',
       subscriber.first_name || 'Friend',
