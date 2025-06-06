@@ -216,7 +216,7 @@ function formatDeliveryTime(deliveryTime: string): string {
     const displayHours = hours % 12 || 12
     
     return `${displayHours}:${minutes.toString().padStart(2, '0')} ${ampm}`
-  } catch (error) {
+  } catch {
     // If parsing fails, return the original value
     return deliveryTime
   }

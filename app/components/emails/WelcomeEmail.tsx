@@ -10,7 +10,6 @@ import {
   Hr,
   Link,
   Font,
-  Button,
   Img,
 } from '@react-email/components'
 
@@ -94,14 +93,14 @@ export default function WelcomeEmail({
             <Text style={welcomeText}>
               Thank you for joining our community of {" "}
               <strong style={highlight}>growth-minded individuals</strong>! 
-              We're excited to support your journey toward {formatPersonalGoals(personalGoals).toLowerCase()}.
+              We&apos;re excited to support your journey toward {formatPersonalGoals(personalGoals).toLowerCase()}.
             </Text>
           </Section>
 
           {/* First Quote */}
           <Section style={quoteSection}>
             <div style={quoteHeader}>
-              <Text style={quoteHeaderText}>✨ Here's your first quote to get started:</Text>
+              <Text style={quoteHeaderText}>✨ Here&apos;s your first quote to get started:</Text>
             </div>
             <div style={quoteContainer}>
               <Text style={quoteText}>&ldquo;{quote}&rdquo;</Text>
@@ -118,7 +117,7 @@ export default function WelcomeEmail({
                 <div>
                   <Text style={expectationTitle}>Daily Delivery</Text>
                   <Text style={expectationText}>
-                    You'll receive your personalized quote every day at <strong>{deliveryTime}</strong> via {formatDeliveryMethods(deliveryMethod)}
+                    You&apos;ll receive your personalized quote every day at <strong>{deliveryTime}</strong> via {formatDeliveryMethods(deliveryMethod)}
                   </Text>
                 </div>
               </div>
@@ -152,7 +151,7 @@ export default function WelcomeEmail({
               ⏰ <strong>Mark your calendar!</strong> Your next personalized quote will arrive tomorrow at {deliveryTime}.
             </Text>
             <Text style={ctaSubtext}>
-              In the meantime, take a moment to reflect on today's quote. How might you apply this wisdom to your {formatPersonalGoals(personalGoals).toLowerCase()} journey?
+              In the meantime, take a moment to reflect on today&apos;s quote. How might you apply this wisdom to your {formatPersonalGoals(personalGoals).toLowerCase()} journey?
             </Text>
           </Section>
 
@@ -180,7 +179,7 @@ export default function WelcomeEmail({
               </Link>
             </Text>
             <Text style={footerNote}>
-              Questions? Just reply to this email - we're here to help!
+              Questions? Just reply to this email - we&apos;re here to help!
             </Text>
           </Section>
         </Container>
