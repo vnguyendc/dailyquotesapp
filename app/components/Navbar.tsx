@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { SunIcon } from './SunIcon'
 import { AuthModal } from './AuthModal'
 import { useAuth } from '../lib/auth'
+import { useScrollDirection } from '../hooks/useScrollDirection'
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -11,21 +13,24 @@ export const Navbar = () => {
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login')
   
   const { user, signOut, loading } = useAuth()
+  const { isVisible } = useScrollDirection()
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    } bg-transparent`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200">
               <SunIcon />
               <div className="font-heading font-bold text-white drop-shadow-lg">
                 <span className="text-xl">your daily</span>
                 <br />
                 <span className="text-xl leading-none">dose</span>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}

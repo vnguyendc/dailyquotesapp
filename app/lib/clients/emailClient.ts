@@ -49,7 +49,7 @@ export async function sendEmail(emailMessage: EmailMessage): Promise<EmailResult
     }
 
     const result = await resend.emails.send({
-      from: 'Your Daily Dose <quotes@dailyquotesapp.vercel.app>',
+      from: 'Your Daily Dose <quotes@yourdailydose.ai>',
       to: emailMessage.to,
       subject: emailMessage.subject,
       html: emailHtml || ''

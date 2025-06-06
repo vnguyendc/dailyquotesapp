@@ -1,26 +1,20 @@
 export interface FormData {
-  // Basic information (moved to step 8)
+  // Step 1: About You  
+  selfDescription: string
+  personalGoals: string[]
+  customGoal: string
+  
+  // Step 2: Preferences
+  emotionalThemes: string[]
+  preferredTone: string
+  
+  // Step 3: Delivery Setup (combined contact + auth)
   firstName: string
   lastName: string
   email: string
   phone: string
   deliveryTime: string
-  
-  // Delivery preferences (new for step 8)
   deliveryMethod: string[] // ['email', 'sms'] - can be both
-  
-  // Personalization fields (reordered)
-  selfDescription: string
-  personalGoals: string[]
-  customGoal: string
-  publicFigures: string
-  personalHeroes: string
-  emotionalThemes: string[]
-  personalAffirmation: string
-  preferredTone: string
-  moodTracking: boolean
-  
-  // Authentication fields (for final step)
   password: string
   confirmPassword: string
 }
