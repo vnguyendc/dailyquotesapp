@@ -10,6 +10,7 @@ import {
   Hr,
   Link,
   Font,
+  Img,
 } from '@react-email/components'
 
 interface DailyQuoteEmailProps {
@@ -18,6 +19,11 @@ interface DailyQuoteEmailProps {
   author: string
   personalization?: string
   unsubscribeUrl?: string
+}
+
+const getLogoUrl = () => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://dailyquotesapp.vercel.app'
+  return `${baseUrl}/logo-email.svg`
 }
 
 export default function DailyQuoteEmail({
@@ -48,6 +54,13 @@ export default function DailyQuoteEmail({
         <Container style={container}>
           {/* Header */}
           <Section style={header}>
+            <Img
+              src={getLogoUrl()}
+              alt="Your Daily Dose"
+              width="120"
+              height="40"
+              style={logo}
+            />
             <div style={sunIcon}>☀️</div>
             <Heading style={greeting}>Good morning, {subscriberName}!</Heading>
             <Text style={tagline}>Your daily dose of inspiration</Text>
@@ -125,6 +138,11 @@ const header = {
   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
   padding: '40px 30px',
   textAlign: 'center' as const,
+}
+
+const logo = {
+  display: 'block',
+  margin: '0 auto 16px auto',
 }
 
 const sunIcon = {
