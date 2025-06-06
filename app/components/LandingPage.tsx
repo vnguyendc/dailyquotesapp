@@ -26,14 +26,14 @@ export const LandingPage = () => {
       <section 
         className="flex items-center justify-center px-4 py-16 min-h-screen relative -mt-20 pt-20"
         style={{
-          backgroundImage: 'url(/simon-berger-twukN12EN7c-unsplash.jpg)',
+          backgroundImage: 'url(/sunrise_mountain_ocean.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/10 to-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/25 to-black/45"></div>
         <div className="max-w-5xl mx-auto text-center relative z-10">
           {/* Main heading */}
           <div className={`mb-8 transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'}`}>

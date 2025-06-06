@@ -25,7 +25,7 @@ export default function GetStartedPage() {
     <div 
       className="min-h-screen relative -mt-20 pt-20"
       style={{
-        backgroundImage: 'url(/simon-berger-twukN12EN7c-unsplash.jpg)',
+        backgroundImage: 'url(/sunrise_mountain_ocean.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

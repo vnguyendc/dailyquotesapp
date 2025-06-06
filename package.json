@@ -15,7 +15,9 @@
     "db:migrate:004": "echo 'Run database/migrations/004_create_quote_deliveries.sql in your Supabase SQL Editor'",
     "db:migrate:005": "echo 'Run database/migrations/005_add_auth_integration.sql in your Supabase SQL Editor'",
     "db:migrate:006": "echo 'Run database/migrations/006_add_form_details.sql in your Supabase SQL Editor'",
-    "db:migrate": "echo 'Run all migrations in database/migrations/ in your Supabase SQL Editor'"
+    "db:migrate": "echo 'Run all migrations in database/migrations/ in your Supabase SQL Editor'",
+    "test:welcome-email": "node scripts/test-welcome-email.js",
+    "send:test-welcome": "node scripts/send-test-welcome.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",

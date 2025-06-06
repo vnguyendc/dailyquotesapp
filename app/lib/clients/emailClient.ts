@@ -1,6 +1,7 @@
 import { Resend } from 'resend'
 import { render } from '@react-email/render'
 import DailyQuoteEmail from '@/app/components/emails/DailyQuoteEmail'
+import WelcomeEmail from '@/app/components/emails/WelcomeEmail'
 
 // Initialize Resend client only when API key is available
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
@@ -163,6 +164,80 @@ export async function sendBulkEmails(messages: EmailMessage[]): Promise<EmailRes
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(email)
+}
+
+/**
+ * Send a welcome email with React Email template
+ */
+export async function sendWelcomeEmailTemplate({
+  to,
+  subscriberName,
+  quote,
+  author,
+  deliveryTime,
+  deliveryMethod,
+  personalGoals,
+  tonePreference
+}: {
+  to: string
+  subscriberName: string
+  quote: string
+  author: string
+  deliveryTime: string
+  deliveryMethod: string[]
+  personalGoals: string[]
+  tonePreference: string
+}): Promise<EmailResult> {
+  try {
+    if (!process.env.RESEND_API_KEY || !resend) {
+      return {
+        success: false,
+        error: 'Resend API key not configured',
+        to
+      }
+    }
+
+    // Render the welcome email template
+    const emailHtml = await render(WelcomeEmail({
+      subscriberName,
+      quote,
+      author,
+      deliveryTime,
+      deliveryMethod,
+      personalGoals,
+      tonePreference,
+      unsubscribeUrl: '#' // TODO: Implement proper unsubscribe functionality
+    }))
+
+    const result = await resend.emails.send({
+      from: 'Your Daily Dose <quotes@yourdailydose.ai>',
+      to: to,
+      subject: `🎉 Welcome to Your Daily Dose, ${subscriberName}!`,
+      html: emailHtml
+    })
+
+    console.log(`Welcome email sent successfully to ${to}: ${result.data?.id}`)
+
+    return {
+      success: true,
+      messageId: result.data?.id,
+      to
+    }
+
+  } catch (error) {
+    console.error(`Failed to send welcome email to ${to}:`, error)
+    
+    let errorMessage = 'Unknown error'
+    if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
+    return {
+      success: false,
+      error: errorMessage,
+      to
+    }
+  }
 }
 
 /**

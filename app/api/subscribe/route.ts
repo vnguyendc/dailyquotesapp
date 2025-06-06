@@ -1,5 +1,6 @@
 import { supabase } from '@/app/lib/clients/supabaseClient'
 import { normalizePhoneNumber, isValidPhoneNumber } from '../../lib/phoneUtils'
+import { sendWelcomeEmailToSubscriber } from '@/app/lib/welcomeEmailService'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
@@ -188,10 +189,36 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Failed to subscribe. Please try again.' }, { status: 500 })
     }
 
-    console.log('New subscriber created:', data?.[0]?.id)
+    const newSubscriberId = data?.[0]?.id
+    console.log('New subscriber created:', newSubscriberId)
+
+    // Send welcome email if email delivery is enabled
+    if (deliveryMethod.includes('email') && newSubscriberId) {
+      try {
+        console.log(`Triggering welcome email for subscriber: ${newSubscriberId}`)
+        
+        // Send welcome email asynchronously (don't wait for it to complete)
+        sendWelcomeEmailToSubscriber(newSubscriberId)
+          .then(result => {
+            if (result.success) {
+              console.log(`Welcome email sent successfully to ${firstName} (${result.to})`)
+            } else {
+              console.error(`Welcome email failed for ${firstName}:`, result.error)
+            }
+          })
+          .catch(error => {
+            console.error(`Welcome email error for ${firstName}:`, error)
+          })
+          
+      } catch (error) {
+        // Don't fail the subscription if welcome email fails
+        console.error('Error triggering welcome email:', error)
+      }
+    }
 
     return NextResponse.json({ 
-      message: `Welcome aboard, ${firstName}! Your personalized daily dose will arrive at ${deliveryTime}.` 
+      message: `Welcome aboard, ${firstName}! Your personalized daily dose will arrive at ${deliveryTime}.`,
+      subscriberId: newSubscriberId
     }, { status: 201 })
   } catch (error) {
     console.error('Subscription error:', error)
