@@ -49,7 +49,7 @@ export const LandingPage = () => {
           <div className={`mb-8 transition-all duration-700 delay-400 ${isLoaded ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'}`}>
             <button
               onClick={handleGetStarted}
-              className="group px-12 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 text-lg relative overflow-hidden"
+              className="group px-12 py-4 bg-white hover:bg-gray-50 text-gray-900 font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 text-lg relative overflow-hidden border border-gray-200"
             >
               <span className="relative z-10 flex items-center">
                 Get Started Free
@@ -57,7 +57,7 @@ export const LandingPage = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5-5 5M6 12h12" />
                 </svg>
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></div>
+              <div className="absolute inset-0 bg-gray-50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></div>
             </button>
           </div>
 
@@ -285,7 +285,7 @@ export const LandingPage = () => {
           </p>
           <button
             onClick={handleGetStarted}
-            className="group px-12 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 text-lg relative overflow-hidden"
+            className="group px-12 py-4 bg-white hover:bg-gray-50 text-gray-900 font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 text-lg relative overflow-hidden border border-gray-200"
           >
             <span className="relative z-10 flex items-center">
               Start Your Free Journey
@@ -293,7 +293,7 @@ export const LandingPage = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5-5 5M6 12h12" />
               </svg>
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></div>
+            <div className="absolute inset-0 bg-gray-50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></div>
           </button>
           <p className="text-sm text-gray-500 font-body mt-4">No credit card required • Cancel anytime • 2-minute setup</p>
         </div>

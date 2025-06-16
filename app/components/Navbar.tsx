@@ -3,14 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { SunIcon } from './SunIcon'
-import { AuthModal } from './AuthModal'
 import { useAuth } from '../lib/auth'
 import { useScrollDirection } from '../hooks/useScrollDirection'
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [authModalOpen, setAuthModalOpen] = useState(false)
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login')
   
   const { user, signOut, loading } = useAuth()
   const { isVisible } = useScrollDirection()
@@ -86,15 +83,12 @@ export const Navbar = () => {
                   )}
                 </div>
               ) : (
-                <button 
-                  onClick={() => {
-                    setAuthMode('login')
-                    setAuthModalOpen(true)
-                  }}
+                <Link 
+                  href="/login"
                   className="font-body bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-3 rounded-full text-sm font-medium transition-all duration-200 hover:shadow-lg transform hover:scale-105"
                 >
                   Login
-                </button>
+                </Link>
               )}
             </div>
           </div>
@@ -150,27 +144,18 @@ export const Navbar = () => {
                 Sign out
               </button>
             ) : (
-              <button 
-                onClick={() => {
-                  setAuthMode('login')
-                  setAuthModalOpen(true)
-                  setIsMenuOpen(false)
-                }}
-                className="font-body w-full text-left bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-3 mt-2 rounded-lg text-base font-medium transition-all duration-200"
+              <Link 
+                href="/login"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-body w-full text-left bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-3 mt-2 rounded-lg text-base font-medium transition-all duration-200 block"
               >
                 Login
-              </button>
+              </Link>
             )}
           </div>
         </div>
       )}
 
-      {/* Auth Modal */}
-      <AuthModal 
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
-        initialMode={authMode}
-      />
     </nav>
   )
 } 

@@ -70,7 +70,7 @@ export const AuthModal = ({ isOpen, onClose, initialMode = 'login' }: AuthModalP
   }
 
   return (
-    <div className="fixed inset-0 z-[60] overflow-y-auto">
+    <div className="fixed inset-0 z-[9999] overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen px-4 py-24 text-center">
         {/* Background overlay */}
         <div 
@@ -79,11 +79,11 @@ export const AuthModal = ({ isOpen, onClose, initialMode = 'login' }: AuthModalP
         />
 
         {/* Modal */}
-        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-3xl relative z-10">
+        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-3xl relative z-20">
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-30"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
